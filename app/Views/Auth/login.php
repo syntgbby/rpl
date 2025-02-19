@@ -26,18 +26,25 @@
             <div class="d-flex flex-column flex-md-row-fluid w-md-50">
                 <div class="d-flex flex-center flex-column flex-md-row-fluid">
                     <div class="w-md-500px">
-                        <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="GET" action="<?= base_url('login') ?>">
-                            <div class="text-center mb-11">
+
+                    <?php if (session()->getFlashdata('alert')): ?>
+                        <div class="alert alert-danger">
+                            <?= session()->getFlashdata('alert') ?>
+                        </div>
+                    <?php endif; ?>
+
+                        <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="POST" action="<?= base_url('login/authenticate') ?>">
+                               <div class="text-center mb-11">
                                 <h1 class="text-gray-900 fw-bolder mb-3">Sign In</h1>
                             </div>
                             <?= csrf_field() ?>
 
                             <div class="fv-row mb-8">
-                                <input type="text" placeholder="Email" name="email" id="email" autocomplete="off" class="form-control bg-transparent" required />
+                                <input type="text" placeholder="Enter your email" name="email" id="email" autocomplete="on" class="form-control bg-transparent" required />
                             </div>
 
                             <div class="fv-row mb-3">
-                                <input type="password" placeholder="Password" name="password" id="password" autocomplete="off" class="form-control bg-transparent" required />
+                                <input type="password" placeholder="Enter your password" name="password" id="password" autocomplete="off" class="form-control bg-transparent" required />
                             </div>
 
                             <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
@@ -68,11 +75,37 @@
         </div>
     </div>
 
-    <script src="<?= base_url('assets/js/bundle.js') ?>"></script>
-    <script src="<?= base_url('assets/js/scripts.js') ?>"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script type="text/javascript">
-    </script>
 </body>
 </html>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#kt_sign_in_submit').on('click', function(e) {
+                e.preventDefault();
+                var email = $('#email').val();
+                var password = $('#password').val();
+
+                // Check if email or password is empty
+                if (email == "" || password == "") {
+                    e.preventDefault(); // Prevent the form from submitting
+
+                    // Show SweetAlert2 if fields are empty
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Warning',
+                        text: 'Email and Password must be filled!'
+                    });
+                } else {
+                    // Show the indicator and spinner
+                    $('.indicator-label').hide();
+                    $('.indicator-progress').show();
+
+                    // If fields are not empty, submit the form
+                    $('#kt_sign_in_form').submit();
+                    $('#kt_sign_in_submit').prop('disabled', true);
+                }
+            });
+
+            // Hide the indicator and spinner by default
+            $('.indicator-progress').hide();
+        });
+    </script>

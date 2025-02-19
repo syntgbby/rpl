@@ -6,7 +6,7 @@ class DashController extends BaseController
 {
     public function index(): string
     {
-        return view('Dash/dashboard');
+        return $this->render('Dash/dashboard');
     }
 
     public function auth()

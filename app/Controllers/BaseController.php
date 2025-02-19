@@ -55,4 +55,22 @@ abstract class BaseController extends Controller
 
         // E.g.: $this->session = service('session');
     }
+
+    public function getMenu()
+    {
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT * FROM master_menu");
+        $get = $query->getResultArray();
+        return $get;
+    }
+
+    // You can add more global variables here like user information, etc.
+
+    public function render($view, $data = [])
+    {
+        // Merge the $menu with any other data passed to the view
+        $data['menu'] = $this->getMenu();
+        
+        return view($view, $data);
+    }
 }
