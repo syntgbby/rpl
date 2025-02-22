@@ -20,6 +20,20 @@ class MasterUserController extends BaseController
         return $this->render('MasterUser/add_user');
     }
 
+    public function getById($rowid)
+    {
+        $db = \Config\Database::connect();
+        // Gunakan query builder atau parameterized query untuk menghindari SQL Injection
+        $query = $db->query("SELECT * FROM master_user WHERE rowid = :rowid:", ['rowid' => $rowid]);
+        $get = $query->getResultArray();
+
+        if ($get) {
+            return $this->response->setJSON($get);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'User not found']);
+        }
+    }
+
     public function add()
     {
         $data = $this->request->getVar();
@@ -63,18 +77,6 @@ class MasterUserController extends BaseController
                 ];
             }
         }
-    }
-
-    public function getTable()
-    {
-        $db = \Config\Database::connect();
-        $query = $db->query("SELECT * FROM master_user");
-        $get = $query->getResultArray();
-        
-        $data = [
-            'data' => $get
-        ];
-        return $this->response->setJSON($data);
     }
 
     public function delete()

@@ -64,12 +64,18 @@ abstract class BaseController extends Controller
         return $get;
     }
 
+    public function getYear()
+    {
+        return date('Y');
+    }
+
     // You can add more global variables here like user information, etc.
 
     public function render($view, $data = [])
     {
         // Merge the $menu with any other data passed to the view
         $data['menu'] = $this->getMenu();
+        $data['year'] = $this->getYear();
         
         return view($view, $data);
     }

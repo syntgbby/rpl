@@ -133,7 +133,11 @@ License: For each use you must have a valid license purchased only from above li
 
 				<!--begin::Modal footer-->
 				<div class="modal-footer bg-light">
-					<button type="submit" class="btn btn-primary" id="savefrm">Save</button>
+					<button type="submit" class="btn btn-primary" id="savefrm">
+						<span class="indicator-label">Save</span>
+						<span class="indicator-progress">Please wait... 
+						<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+					</button>
 					<button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
 				</div>
 				<!--end::Modal footer-->
