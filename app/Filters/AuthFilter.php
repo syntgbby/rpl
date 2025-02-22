@@ -13,7 +13,7 @@ class AuthFilter implements FilterInterface
     {
         // Check if user is logged in or not
         if (! session()->get('is_login')) {
-            return redirect()->to('/');
+            return redirect()->to('/')->with('error', 'Please login to access this page');
         }
     }
 
