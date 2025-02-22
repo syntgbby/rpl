@@ -22,4 +22,6 @@ $routes->get('/get-table-master-user', 'MasterUserController::getTable');
 $routes->post('/delete-master-user', 'MasterUserController::delete');
 
 $routes->get('/myprofile', 'Profile::index');
+$routes->get('/editprofile', 'Profile::indexEdit');
+
 
