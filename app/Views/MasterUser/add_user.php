@@ -48,58 +48,95 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        loadData();
+        var rowid = $('#modal').data('rowid');
 
-        $('#savefrm').on('click', function(e) {
-            e.preventDefault();
-            var rowid = $('#modal').data('rowid');
-            var group_cd = $('#group_cd').val();
-            var descs = $('#descs').val();
-            var status = $('input[name="status"]:checked').val();
+        if (rowid != 0) {
+            loadData();
+        }
+    });
 
-            if (group_cd == "" || descs == "" || status == "") {
-                e.preventDefault(); 
+    $('#savefrm').on('click', function(e) {
+        e.preventDefault();
+        var rowid = $('#modal').data('rowid');
+        var group_cd = $('#group_cd').val();
+        var descs = $('#descs').val();
+        var status = $('input[name="status"]:checked').val();
 
-                toastr.error('All fields must be filled!');
-            } else {
-                var formData = {
-                    rowid: rowid,
-                    group_cd: group_cd,
-                    descs: descs,
-                    status: status
-                };
-                
-                var actionUrl = '<?= base_url('add-master-user') ?>'; 
+        // Cek apakah semua field sudah diisi
+        if (group_cd == "" || descs == "" || status == "") {
+            toastr.error('All fields must be filled!');
+            return;  // Jangan lanjutkan eksekusi
+        }
 
-                $.ajax({
-                    url: actionUrl,
-                    type: 'POST',
-                    data: formData,
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            toastr.success(response.message);
-                            
-                            location.reload();
-                        } else {
-                            toastr.error(response.message);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        toastr.error('An error occurred while sending the request.');
-                    }
-                });
+        // Menyembunyikan indikator dan menampilkan spinner
+        $('.indicator-label').hide();
+        $('.indicator-progress').show();
+
+        // Menonaktifkan tombol Save untuk mencegah klik ganda
+        $('#savefrm').prop('disabled', true);
+
+        var formData = {
+            rowid: rowid,
+            group_cd: group_cd,
+            descs: descs,
+            status: status
+        };
+
+        var actionUrl = '<?= base_url('add-master-user') ?>'; // Ganti dengan URL yang sesuai
+
+        // Kirim request AJAX
+        $.ajax({
+            url: actionUrl,
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                if (response.status === 'success') {
+                    toastr.success(response.message);
+                    location.reload();  // Reload halaman setelah berhasil
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                toastr.error('An error occurred while sending the request.');
+            },
+            complete: function() {
+                // Mengembalikan status tombol setelah selesai
+                $('#savefrm').prop('disabled', false);
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
             }
         });
-        
-        function loadData() {
+    });
+
+    // Fungsi untuk memuat data jika ada rowid
+    function loadData() {
+        var rowid = $('#modal').data('rowid');
+
+        if (rowid === 0) {
+            // Jika rowid adalah 0, reset form untuk tambah data
+            $('#group_cd').val('');
+            $('#descs').val('');
+            $('#status_master-user_Y').prop('checked', true);  // Default status Active
+        } else {
+            // Jika rowid ada, request data untuk mengedit
             $.ajax({
-                url: '<?= base_url('get-master-user') ?>',
+                url: '<?= base_url('get-master-user/') ?>' + rowid,
                 type: 'GET',
                 success: function(response) {
-                    console.log(response);
+                    if (response.status === 'error') {
+                        toastr.error(response.message);
+                        return;
+                    }
+                    $('#group_cd').val(response[0].group_cd);
+                    $('#descs').val(response[0].descs);
+                    if (response[0].status == 'Y') {
+                        $('#status_master-user_Y').prop('checked', true);
+                    } else {
+                        $('#status_master-user_N').prop('checked', true);
+                    }
                 }
             });
         }
-        
-    });
+    }
 </script>

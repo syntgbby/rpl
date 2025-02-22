@@ -15,12 +15,9 @@
                     <h1>Master Menu</h1>
                 </div>
                 <div class="card-title">
-                    <!--begin::Search-->
                     <div class="d-flex align-items-center position-relative my-1">
-                        <i class="ki-outline ki-magnifier fs-3 position-absolute ms-5"></i>
-                        <input type="text" data-kt-user-table-filter="search" class="form-control form-control-solid w-250px ps-13" placeholder="Search user" />
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMenuModal" id="addMenu"><i class="fa-solid fa-user-plus"></i> Add Menu</button>
                     </div>
-                    <!--end::Search-->
                 </div>
                 <!--begin::Card title-->
             </div>
@@ -29,21 +26,24 @@
             <div class="card-body py-4">
                 <!--begin::Table-->
                 <div class="table-responsive">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_menus">
                         <thead>
                             <tr class="text-center text-muted fw-bold fs-7 text-uppercase gs-0">
-                                <th class="min-w-125px">Menu CD</th>
-                                <th class="min-w-125px">Title</th>
-                                <th class="min-w-125px">URL</th>
-                                <th class="min-w-125px">Icon</th>
-                                <th class="min-w-125px">Menu Parent</th>
-                                <th class="min-w-125px">Status</th>
-                                <th class="min-w-100px">Actions</th>
+                                <th class="min-w-15px">No</th>
+                                <th class="min-w-25px">Menu CD</th>
+                                <th class="min-w-85px">Title</th>
+                                <th class="min-w-85px">URL</th>
+                                <th class="min-w-55px">Icon</th>
+                                <th class="min-w-15px">Menu Parent</th>
+                                <th class="min-w-75px">Status</th>
+                                <th class="min-w-100px">Action</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 fw-semibold">
+                            <?php $no = 1; ?>
                             <?php foreach ($data as $row) : ?>
                             <tr>
+                                <td class="text-center"><?= $no++ ?></td>
                                 <td><?= $row['menu_cd'] ?></td>
                                 <td><?= $row['title'] ?></td>
                                 <td><?= $row['url'] ?></td>
@@ -52,8 +52,8 @@
                                 <td class="text-center"><?= $row['status'] ?></td>
                                 <td class="text-center">
                                     <div class="d-flex align-items-center justify-content-center gap-2">
-                                        <button class="btn btn-light btn-sm btn-icon btn-active-light-primary" id="editMenu" data-rowid="<?= $row['rowid'] ?>"><i class="fa-solid fa-pen-to-square"></i></button>
-                                        <button class="btn btn-light btn-sm btn-icon btn-active-light-danger" id="deleteMenu" data-rowid="<?= $row['rowid'] ?>"><i class="fa-solid fa-trash"></i></button>
+                                        <button type="button" class="btn btn-light btn-sm btn-icon btn-active-light-primary" onClick="editMasterMenu(<?= $row['rowid'] ?>)"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        <button type="button" class="btn btn-light btn-sm btn-icon btn-active-light-danger" onClick="deleteMasterMenu(<?= $row['rowid'] ?>)"><i class="fa-solid fa-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>
@@ -71,20 +71,60 @@
 </div>
 <!--end::Content wrapper-->
 
-<?= $this->endSection() ?>
-
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#editMenu').click(function() {
-            var rowid = $(this).data('rowid');
-            alert(rowid);
-        });
-    });
+        $('#kt_table_menus').DataTable();
 
-    $(document).ready(function() {
-        $('#deleteMenu').click(function() {
-            var rowid = $(this).data('rowid');
-            alert(rowid);
+        $('#addMenu').click(function() {
+            $('#modaltitle').html('Menu Entry');
+            $('#modalbody').load("<?= base_url('view-add-master-menu') ?>");
+            $('#modal').data('rowid', 0);
+            $('#modal').modal('show');
         });
     });
+    
+    function editMasterMenu(rowid) {
+        $('#modaltitle').html('Menu Edit');
+        $('#modalbody').load("<?= base_url('view-add-master-menu') ?>");
+        $('#modal').data('rowid', rowid);
+        $('#modal').modal('show');
+    }
+
+    function deleteMasterMenu(rowid) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var formData = {
+                    rowid: rowid
+                };
+                
+                var actionUrl = '<?= base_url('delete-master-menu') ?>'; 
+
+                $.ajax({
+                    url: actionUrl,
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            toastr.success(response.message);
+                            
+                            location.reload();
+                        } else {
+                            toastr.error(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        toastr.error('An error occurred while sending the request.');
+                    }
+                });
+            }
+        });
+    }
 </script>
+<?= $this->endSection() ?>
