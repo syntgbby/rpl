@@ -23,4 +23,6 @@ $routes->post('/add-master-user', 'MasterUserController::add');
 $routes->post('/delete-master-user', 'MasterUserController::delete');
 
 $routes->get('/myprofile', 'Profile::index');
+$routes->get('/editprofile', 'Profile::indexEdit');
+
 
