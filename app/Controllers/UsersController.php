@@ -2,34 +2,38 @@
 
 namespace App\Controllers;
 
-class MasterMenuController extends BaseController
+class UsersController extends BaseController
 {
     public function index(): string
     {
         $db = \Config\Database::connect();
-        $query = $db->table("master_menu")->get()->getResultArray();
-
+        $query = $db->table("users")->get()->getResultArray();
         $data = [
             'data' => $query
         ];
-
-        return $this->render('MasterMenu/master_menu', $data);
+        return $this->render('Users/master_users', $data);
     }
 
     public function indexAdd()
     {
-        return $this->render('MasterMenu/add_menu');
+        $db = \Config\Database::connect();
+        $query = $db->table("master_user")->get()->getResultArray();
+        $data = [
+            'group' => $query
+        ];
+        return $this->render('Users/add_user', $data);
     }
 
     public function getById($rowid)
     {
         $db = \Config\Database::connect();
-        $query = $db->table("master_menu")->where("rowid", $rowid)->get()->getResultArray();
+        // Gunakan query builder atau parameterized query untuk menghindari SQL Injection
+        $query = $db->table("users")->where("rowid", $rowid)->get()->getResultArray();
 
         if ($query) {
             return $this->response->setJSON($query);
         } else {
-            return $this->response->setJSON(['status' => 'error', 'message' => 'Menu not found']);
+            return $this->response->setJSON(['status' => 'error', 'message' => 'User not found']);
         }
     }
 
@@ -39,63 +43,62 @@ class MasterMenuController extends BaseController
         $db = \Config\Database::connect();
 
         $rowid = $data['rowid'];
-        $menu_cd = $data['menu_cd'];
-        $title = $data['title'];
-        $url = $data['url'];
-        $parent_menucd = $data['parent_menucd'];
-        $icon = $data['icon'];
-        $order_seq = $data['order_seq'];
+        $name = $data['name'];
+        $group_cd = $data['group_cd'];
+        $email = $data['email'];
         $status = $data['status'];
 
         date_default_timezone_set('Asia/Jakarta');
         $data_date = date('Y-m-d H:i:s');
 
         $data_insert = [
-            'menu_cd' => $menu_cd,
-            'title' => $title,
-            'url' => $url,
-            'parent_menucd' => $parent_menucd,
-            'icon' => $icon,
-            'order_seq' => $order_seq,
+            'name' => $name,
+            'group_cd' => $group_cd,
+            'email' => $email,
             'status' => $status,
             'data_date' => $data_date
         ];
 
         if ($rowid == 0) {
-            $query = $db->table("master_menu")->insert($data_insert);
+            $query = $db->table("users")->insert($data_insert);
 
             if ($query) {
                 $response = [
                     'status' => 'success',
-                    'message' => 'Menu added successfully'
+                    'message' => 'User added successfully'
                 ];
                 return $this->response->setJSON($response);
             } else {
                 $response = [
                     'status' => 'error',
-                    'message' => 'Menu added failed'
+                    'message' => 'User added failed'
                 ];
                 return $this->response->setJSON($response);
             }
         } else {
-            $query = $db->table("master_menu")->where("rowid", $rowid)->update($data_insert);
+            $dt_update = [
+                'group_cd' => $group_cd,
+                'name' => $name,
+                'email' => $email,
+                'status' => $status,
+                'data_date' => $data_date
+            ];
+
+            $query = $db->table('users')->where('rowid', $rowid)->update($dt_update);
 
             if ($query) {
                 $response = [
                     'status' => 'success',
-                    'message' => 'Menu updated successfully'
+                    'message' => 'User updated successfully'
                 ];
                 return $this->response->setJSON($response);
             } else {
                 $response = [
                     'status' => 'error',
-                    'message' => 'Menu updated failed'
+                    'message' => 'User updated failed'
                 ];
-                return $this->response->setJSON($response);
             }
         }
-
-        return redirect()->to('/master-menu');
     }
 
     public function delete()
@@ -105,23 +108,23 @@ class MasterMenuController extends BaseController
 
         $db = \Config\Database::connect();
         
-        $query = $db->table("master_menu")->where("rowid", $rowid)->delete();
+        $query = $db->table("users")->where("rowid", $rowid)->delete();
 
         if ($query) {
             $response = [
                 'status' => 'success',
-                'message' => 'Menu deleted successfully'
+                'message' => 'User deleted successfully'
             ];
             return $this->response->setJSON($response);
         } else {
             $response = [
                 'status' => 'error',
-                'message' => 'Menu deleted failed'
+                'message' => 'User deleted failed'
             ];
             return $this->response->setJSON($response);
         }
 
-        return redirect()->to('/master-menu');
+        return redirect()->to('/users');
     }
 
 }

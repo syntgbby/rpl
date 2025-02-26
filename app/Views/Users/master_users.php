@@ -12,11 +12,11 @@
             <div class="card-header border-0 pt-6">
                 <!--begin::Card title-->
                 <div class="card-title">
-                    <h1>Master Menu</h1>
+                    <h1>Users</h1>
                 </div>
                 <div class="card-title">
                     <div class="d-flex align-items-center position-relative my-1">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMenuModal" id="addMenu"><i class="fa-solid fa-plus"></i> Add</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal" id="addUser"><i class="fa-solid fa-plus"></i> Add</button>
                     </div>
                 </div>
                 <!--begin::Card title-->
@@ -26,15 +26,14 @@
             <div class="card-body py-4">
                 <!--begin::Table-->
                 <div class="table-responsive">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_menus">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
                         <thead>
                             <tr class="text-center text-muted fw-bold fs-7 text-uppercase gs-0">
                                 <th class="min-w-15px">No</th>
-                                <th class="min-w-25px">Menu CD</th>
-                                <th class="min-w-85px">Title</th>
-                                <th class="min-w-85px">URL</th>
-                                <th class="min-w-55px">Icon</th>
-                                <!-- <th class="min-w-15px">Menu Parent</th> -->
+                                <th class="min-w-25px">Name</th>
+                                <th class="min-w-85px">Email</th>
+                                <!-- <th class="min-w-55px">Pict</th> -->
+                                <th class="min-w-85px">Group CD</th>
                                 <th class="min-w-75px">Status</th>
                                 <th class="min-w-100px">Action</th>
                             </tr>
@@ -44,16 +43,15 @@
                             <?php foreach ($data as $row) : ?>
                             <tr>
                                 <td class="text-center"><?= $no++ ?></td>
-                                <td><?= $row['menu_cd'] ?></td>
-                                <td><?= $row['title'] ?></td>
-                                <td><?= $row['url'] ?></td>
-                                <td class="text-center"><i class="<?= $row['icon'] ?>"></i></td>
-                                <!-- <td class="text-center"><?= $row['parent_menucd'] ?></td> -->
-                                <td class="text-center"><?= ($row['status'] == 'Y') ? '<span class="badge bg-success text-white">Active</span>' : '<span class="badge bg-danger text-white">Inactive</span>' ?></td>
+                                <td><?= $row['name'] ?></td>
+                                <td><?= $row['email'] ?></td>
+                                <!-- <td class="text-center"><i class="<?= $row['pict'] ?>"></i></td> -->
+                                <td class="text-center"><?= $row['group_cd'] ?></td>
+                                <td class="text-center"><?= $row['status'] ?></td>
                                 <td class="text-center">
                                     <div class="d-flex align-items-center justify-content-center gap-2">
-                                        <button type="button" class="btn btn-light btn-sm btn-icon btn-active-light-primary" onClick="editMasterMenu(<?= $row['rowid'] ?>)"><i class="fa-solid fa-pen-to-square"></i></button>
-                                        <button type="button" class="btn btn-light btn-sm btn-icon btn-active-light-danger" onClick="deleteMasterMenu(<?= $row['rowid'] ?>)"><i class="fa-solid fa-trash"></i></button>
+                                        <button type="button" class="btn btn-light btn-sm btn-icon btn-active-light-primary" onClick="editUser(<?= $row['rowid'] ?>)"><i class="fa-solid fa-pen-to-square"></i></button>
+                                        <button type="button" class="btn btn-light btn-sm btn-icon btn-active-light-danger" onClick="deleteUser(<?= $row['rowid'] ?>)"><i class="fa-solid fa-trash"></i></button>
                                     </div>
                                 </td>
                             </tr>
@@ -73,24 +71,24 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#kt_table_menus').DataTable();
+        $('#kt_table_users').DataTable();
 
-        $('#addMenu').click(function() {
-            $('#modaltitle').html('Menu Entry');
-            $('#modalbody').load("<?= base_url('view-add-master-menu') ?>");
+        $('#addUser').click(function() {
+            $('#modaltitle').html('User Entry');
+            $('#modalbody').load("<?= base_url('view-add-users') ?>");
             $('#modal').data('rowid', 0);
             $('#modal').modal('show');
         });
     });
     
-    function editMasterMenu(rowid) {
-        $('#modaltitle').html('Menu Edit');
-        $('#modalbody').load("<?= base_url('view-add-master-menu') ?>");
+    function editUser(rowid) {
+        $('#modaltitle').html('User Edit');
+        $('#modalbody').load("<?= base_url('view-add-users') ?>");
         $('#modal').data('rowid', rowid);
         $('#modal').modal('show');
     }
 
-    function deleteMasterMenu(rowid) {
+    function deleteUser(rowid) {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -104,7 +102,7 @@
                     rowid: rowid
                 };
                 
-                var actionUrl = '<?= base_url('delete-master-menu') ?>'; 
+                var actionUrl = '<?= base_url('delete-users') ?>'; 
 
                 $.ajax({
                     url: actionUrl,

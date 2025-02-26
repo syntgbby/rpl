@@ -2,88 +2,91 @@
 
 namespace App\Controllers;
 
-class MasterUserController extends BaseController
+class MasterGroupUserController extends BaseController
 {
     public function index(): string
     {
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT * FROM master_user");
-        $get = $query->getResultArray();
+        $query = $db->table("master_user")->get()->getResultArray();
         $data = [
-            'data' => $get
+            'data' => $query
         ];
-        return $this->render('MasterUser/master_user', $data);
+        return $this->render('MasterGroupUser/master_group_user', $data);
     }
 
     public function indexAdd()
     {
-        return $this->render('MasterUser/add_user');
+        return $this->render('MasterGroupUser/add_group_user');
     }
 
     public function getById($rowid)
     {
         $db = \Config\Database::connect();
         // Gunakan query builder atau parameterized query untuk menghindari SQL Injection
-        $query = $db->query("SELECT * FROM master_user WHERE rowid = :rowid:", ['rowid' => $rowid]);
-        $get = $query->getResultArray();
+        $query = $db->table("master_user")->where("rowid", $rowid)->get()->getResultArray();
 
-        if ($get) {
-            return $this->response->setJSON($get);
+        if ($query) {
+            return $this->response->setJSON($query);
         } else {
             return $this->response->setJSON(['status' => 'error', 'message' => 'User not found']);
         }
     }
 
-    public function add()
+    public function store()
     {
         $data = $this->request->getVar();
+        $db = \Config\Database::connect();
 
         $rowid = $data['rowid'];
         $group_cd = $data['group_cd'];
         $descs = $data['descs'];
         $status = $data['status'];
 
+        date_default_timezone_set('Asia/Jakarta');
+        $data_date = date('Y-m-d H:i:s');
+
+        $data_insert = [
+            'group_cd' => $group_cd,
+            'descs' => $descs,
+            'status' => $status,
+            'data_date' => $data_date
+        ];
+
         if ($rowid == 0) {
-            $db = \Config\Database::connect();
-            $query = $db->query("INSERT INTO master_user (group_cd, descs, status) VALUES ('$group_cd', '$descs', '$status')");
+            $query = $db->table("master_user")->insert($data_insert);
 
             if ($query) {
                 $response = [
                     'status' => 'success',
-                    'message' => 'User added successfully'
+                    'message' => 'Master User added successfully'
                 ];
                 return $this->response->setJSON($response);
             } else {
                 $response = [
                     'status' => 'error',
-                    'message' => 'User added failed'
+                    'message' => 'Master User added failed'
                 ];
                 return $this->response->setJSON($response);
             }
         } else {
-            $db = \Config\Database::connect();
-
-            $dt_update = [
-                'group_cd' => $group_cd,
-                'descs' => $descs,
-                'status' => $status
-            ];
-
-            $query = $db->table('master_user')->where('rowid', $rowid)->update($dt_update);
+            $query = $db->table('master_user')->where('rowid', $rowid)->update($data_insert);
 
             if ($query) {
                 $response = [
                     'status' => 'success',
-                    'message' => 'User updated successfully'
+                    'message' => 'Master User updated successfully'
                 ];
                 return $this->response->setJSON($response);
             } else {
                 $response = [
                     'status' => 'error',
-                    'message' => 'User updated failed'
+                    'message' => 'Master User updated failed'
                 ];
+                return $this->response->setJSON($response);
             }
         }
+
+        return redirect()->to('/master-group-user');
     }
 
     public function delete()
@@ -93,23 +96,23 @@ class MasterUserController extends BaseController
 
         $db = \Config\Database::connect();
         
-        $query = $db->query("DELETE FROM master_user WHERE rowid = '$rowid'");
+        $query = $db->table("master_user")->where("rowid", $rowid)->delete();
 
         if ($query) {
             $response = [
                 'status' => 'success',
-                'message' => 'User deleted successfully'
+                'message' => 'Master User deleted successfully'
             ];
             return $this->response->setJSON($response);
         } else {
             $response = [
                 'status' => 'error',
-                'message' => 'User deleted failed'
+                'message' => 'Master User deleted failed'
             ];
             return $this->response->setJSON($response);
         }
 
-        return redirect()->to('/master-user');
+        return redirect()->to('/master-group-user');
     }
 
 }

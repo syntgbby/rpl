@@ -1,4 +1,4 @@
-<form id="frm" class="p-3">
+<form id="frmmastermenu" class="p-3">
     <div class="row">
         <div class="col-md-12">
             <div class="form-group mb-5">
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md-7">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="status" id="status_master-menu_Y" value="Y">
+                            <input class="form-check-input" type="radio" name="status" id="status_master-menu_Y" value="Y" checked>
                             <label class="form-check-label" for="status_master-menu_Y">Active</label>
                         </div>
                         <div class="form-check form-check-inline">
@@ -188,7 +188,7 @@
                         toastr.error(response.message);
                         return;
                     }
-                    console.log(response);
+
                     $('#menu_cd').val(response[0].menu_cd);
                     $('#title').val(response[0].title);
                     $('#url').val(response[0].url);

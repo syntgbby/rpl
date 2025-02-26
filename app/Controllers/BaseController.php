@@ -59,14 +59,30 @@ abstract class BaseController extends Controller
     public function getMenu()
     {
         $db = \Config\Database::connect();
-        $query = $db->query("SELECT * FROM master_menu");
-        $get = $query->getResultArray();
-        return $get;
+        $query = $db->table("master_menu")->where("status", "Y")->get()->getResultArray();
+        return $query;
     }
 
     public function getYear()
     {
+        date_default_timezone_set('Asia/Jakarta');
         return date('Y');
+    }
+
+    public function getUser()
+    {
+        $session = \config\Services::session();
+        $name = $session->get('name');
+        $email = $session->get('email');
+        $group_cd = $session->get('group_cd');
+
+        $data = [
+            'name' => $name,
+            'email' => $email,
+            'group_cd' => $group_cd,
+        ];
+
+        return $data;
     }
     // You can add more global variables here like user information, etc.
 
@@ -75,6 +91,7 @@ abstract class BaseController extends Controller
         // Merge the $menu with any other data passed to the view
         $data['menu'] = $this->getMenu();
         $data['year'] = $this->getYear();
+        $data['user'] = $this->getUser();
         
         return view($view, $data);
     }

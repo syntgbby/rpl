@@ -33,8 +33,8 @@
                         </div>
                     <?php endif; ?>
 
-                        <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="POST" action="<?= base_url('login/authenticate') ?>">
-                               <div class="text-center mb-11">
+                        <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form">
+                            <div class="text-center mb-11">
                                 <h1 class="text-gray-900 fw-bolder mb-3">Sign In</h1>
                             </div>
                             <?= csrf_field() ?>
@@ -59,6 +59,7 @@
                                     <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                 </button>
                             </div>
+                            
                             <div class="text-gray-500 text-center fw-semibold fs-6">Not a Member yet? 
                             <a href="<?= base_url('register') ?>" class="link-primary">Sign up</a></div>
                         </form>
@@ -77,35 +78,55 @@
 
 </body>
 </html>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#kt_sign_in_submit').on('click', function(e) {
-                e.preventDefault();
-                var email = $('#email').val();
-                var password = $('#password').val();
 
-                // Check if email or password is empty
-                if (email == "" || password == "") {
-                    e.preventDefault(); // Prevent the form from submitting
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#kt_sign_in_submit').on('click', function(e) {
+            e.preventDefault();
+            var email = $('#email').val();
+            var password = $('#password').val();
 
-                    // Show SweetAlert2 if fields are empty
-                    Swal.fire({
-                        icon: 'warning',
-                        title: 'Warning',
-                        text: 'Email and Password must be filled!'
-                    });
-                } else {
-                    // Show the indicator and spinner
-                    $('.indicator-label').hide();
-                    $('.indicator-progress').show();
+            // Check if email or password is empty
+            if (email == "" || password == "") {
+                e.preventDefault(); // Prevent the form from submitting
 
-                    // If fields are not empty, submit the form
-                    $('#kt_sign_in_form').submit();
-                    $('#kt_sign_in_submit').prop('disabled', true);
-                }
-            });
+                // Show SweetAlert2 if fields are empty
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Warning',
+                    text: 'Email and Password must be filled!'
+                });
+            } else {
+                // Show the indicator and spinner
+                $('.indicator-label').hide();
+                $('.indicator-progress').show();
 
-            // Hide the indicator and spinner by default
-            $('.indicator-progress').hide();
+                // If fields are not empty, submit the form
+                $('#kt_sign_in_form').submit();
+                $('#kt_sign_in_submit').prop('disabled', true);
+
+                var formData = new FormData();
+                formData.append('email', email);
+                formData.append('password', password);
+
+                var actionUrl = '<?= base_url('login/authenticate') ?>'; // Ganti dengan URL yang sesuai
+
+                // Kirim request AJAX
+                $.ajax({
+                    url: actionUrl,
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                        toastr.error('An error occurred while sending the request.');
+                    }
+                });
+            }
         });
-    </script>
+    });
+
+</script>

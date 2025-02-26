@@ -109,7 +109,7 @@ License: For each use you must have a valid license purchased only from above li
 	<!--end::Body-->
 	
 	<!--begin::Modal-->
-	<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+	<div class="modal fade" id="modal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
 		<!--begin::Modal dialog-->
 		<div class="modal-dialog modal-dialog-centered mw-650px">
 			<!--begin::Modal content-->

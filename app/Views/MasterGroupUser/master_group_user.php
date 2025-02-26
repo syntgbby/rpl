@@ -12,11 +12,11 @@
             <div class="card-header border-0 pt-6">
                 <!--begin::Card title-->
                 <div class="card-title">
-                    <h1>Master User</h1>
+                    <h1>Master Group User</h1>
                 </div>
                 <div class="card-title">
                     <div class="d-flex align-items-center position-relative my-1">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal" id="addUser"><i class="fa-solid fa-user-plus"></i> Add User</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addMasterGroupUserModal" id="addMasterGroupUser"><i class="fa-solid fa-plus"></i> Add</button>
                     </div>
                 </div>
                 <!--begin::Card title-->
@@ -26,7 +26,7 @@
             <div class="card-body py-4">
                 <!--begin::Table-->
                 <div class="table-responsive">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users">
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_master_users">
                         <thead>
                             <tr class="text-center text-muted fw-bold fs-7 text-uppercase gs-0">
                                 <th class="min-w-15px">No</th>
@@ -43,7 +43,7 @@
                                     <td><?= $no++ ?></td>
                                     <td><?= $row['group_cd'] ?></td>
                                     <td><?= $row['descs'] ?></td>
-                                    <td><?= $row['status'] ?></td>
+                                    <td class="text-center"><?= ($row['status'] == 'Y') ? '<span class="badge bg-success text-white">Active</span>' : '<span class="badge bg-danger text-white">Inactive</span>' ?></td>
                                     <td class="text-center">
                                         <div class="d-flex align-items-center justify-content-center gap-2">
                                             <button type="button" class="btn btn-light btn-sm btn-icon btn-active-light-primary" onClick="editMasterUser(<?= $row['rowid'] ?>)"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -67,19 +67,19 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#kt_table_users').DataTable();
+    $('#kt_table_master_users').DataTable();
 
-    $('#addUser').click(function() {
-        $('#modaltitle').html('User Entry');
-        $('#modalbody').load("<?= base_url('view-add-master-user') ?>");
+    $('#addMasterUser').click(function() {
+        $('#modaltitle').html('Master Group User Entry');
+        $('#modalbody').load("<?= base_url('view-add-master-group-user') ?>");
         $('#modal').data('rowid', 0);
         $('#modal').modal('show');
     });
 });
 
 function editMasterUser(rowid) {
-    $('#modaltitle').html('User Edit');
-    $('#modalbody').load("<?= base_url('view-add-master-user') ?>");
+    $('#modaltitle').html('Master Group User Edit');
+    $('#modalbody').load("<?= base_url('view-add-master-group-user') ?>");
     $('#modal').data('rowid', rowid);
     $('#modal').modal('show');
 }
@@ -98,7 +98,7 @@ function deleteMasterUser(rowid) {
                 rowid: rowid
             };
                 
-            var actionUrl = '<?= base_url('delete-master-user') ?>'; 
+            var actionUrl = '<?= base_url('delete-master-group-user') ?>'; 
 
             $.ajax({
                 url: actionUrl,
