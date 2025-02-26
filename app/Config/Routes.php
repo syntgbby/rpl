@@ -12,3 +12,4 @@ $routes->get('/register', 'LoginController::register');
 $routes->get('/logout', 'LoginController::logout');
 
 $routes->get('/dashboard', 'DashController::index');
+$routes->get('/list_pendaftaran', 'ListController::index');
