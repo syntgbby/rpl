@@ -477,11 +477,9 @@
 							</div>
 						</div>
 					</div>
-				</div>
-
-
-				<?= $this->renderSection('content'); ?>
-
+					
+					</div>
+					<?= $this->renderSection('content'); ?>
 			</div>
 		</div>
 
