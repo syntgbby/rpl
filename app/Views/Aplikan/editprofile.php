@@ -24,8 +24,7 @@
                                 <!--begin::Content-->
                                 <div id="kt_account_settings_profile_details" class="collapse show">
                                     <!--begin::Form-->
-                                    <form id="kt_account_profile_details_form" class="form">
-                                        <!--begin::Card body-->
+                                    <form action="<?= base_url('profile/update') ?>" method="post" enctype="multipart/form-data">                                        <!--begin::Card body-->
                                         <div class="card-body border-top p-9">
                                             <!--begin::Input group-->
                                             <div class="row mb-6">
@@ -35,26 +34,26 @@
                                                 <!--begin::Col-->
                                                 <div class="col-lg-8">
                                                     <!--begin::Image input-->
-                                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/avatars/blank.svg')">
+                                                    <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('assets/media/svg/pict/blank.svg')">
                                                         <!--begin::Preview existing avatar-->
-                                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/avatars/300-1.jpg)"></div>
+                                                        <div class="image-input-wrapper w-125px h-125px" style="background-image: url(assets/media/pict/300-1.jpg)"></div>
                                                         <!--end::Preview existing avatar-->
                                                         <!--begin::Label-->
-                                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change avatar">
+                                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="Change pict">
                                                             <i class="ki-outline ki-pencil fs-7"></i>
                                                             <!--begin::Inputs-->
-                                                            <input type="file" name="avatar" accept=".png, .jpg, .jpeg" />
-                                                            <input type="hidden" name="avatar_remove" />
+                                                            <input type="file" name="pict" accept=".png, .jpg, .jpeg" />
+                                                            <input type="hidden" name="pict" />
                                                             <!--end::Inputs-->
                                                         </label>
                                                         <!--end::Label-->
                                                         <!--begin::Cancel-->
-                                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel avatar">
+                                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="Cancel pict">
                                                             <i class="ki-outline ki-cross fs-2"></i>
                                                         </span>
                                                         <!--end::Cancel-->
                                                         <!--begin::Remove-->
-                                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove avatar">
+                                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="Remove pict">
                                                             <i class="ki-outline ki-cross fs-2"></i>
                                                         </span>
                                                         <!--end::Remove-->
@@ -78,8 +77,7 @@
                                                     <div class="row">
                                                         <!--begin::Col-->
                                                         <div class="col-lg-12 fv-row">
-                                                            <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="Max" />
-                                                        </div>
+                                                        <input type="text" name="name" class="form-control" value="<?= isset($get['name']) ? esc($get['name']) : '' ?>" required>
                                                         <!--end::Col-->
                                                      
                                                     </div>
@@ -95,8 +93,8 @@
                                                 <!--end::Label-->
                                                 <!--begin::Col-->
                                                 <div class="col-lg-8 fv-row">
-                                                    <input type="text" name="company" class="form-control form-control-lg form-control-solid" placeholder="Company name" value="Keenthemes" />
-                                                </div>
+                                                <input type="text" name="tempat_lahir" class="form-control" value="<?= isset($get['tempat_lahir']) ? esc($get['tempat_lahir']) : '' ?>">                                           
+                                            </div>
                                                 <!--end::Col-->
                                             </div>
                                             <!--end::Input group-->
@@ -112,8 +110,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Col-->
                                                 <div class="col-lg-8 fv-row">
-                                                    <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="044 3276 454 935" />
-                                                </div>
+                                                <input type="text" name="telepon" class="form-control" value="<?= isset($get['telepon']) ? esc($get['telepon']) : '' ?>">                                                 </div>
                                                 <!--end::Col-->
                                             </div>
                                             <!--end::Input group-->
@@ -124,7 +121,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Col-->
                                                 <div class="col-lg-8 fv-row">
-                                                    <input type="text" name="website" class="form-control form-control-lg form-control-solid" placeholder="Company website" value="keenthemes.com" />
+                                                <input type="text" name="jenis_kelamin" class="form-control" value="<?= isset($get['jenis_kelamin']) ? esc($get['jenis_kelamin']) : '' ?>">                                                 </div>
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -136,7 +133,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Col-->
                                                 <div class="col-lg-8 fv-row">
-                                                    <input type="text" name="website" class="form-control form-control-lg form-control-solid" placeholder="Company website" value="keenthemes.com" />
+                                                <input type="text" name="agama" class="form-control" value="<?= isset($get['agama']) ? esc($get['agama']) : '' ?>">                                                 </div>
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -145,10 +142,11 @@
                                         <!--begin::Actions-->
                                         <div class="card-footer d-flex justify-content-end py-6 px-9">
                                             <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-                                            <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                            <a href="<?= base_url('myprofile') ?>"></a>  
                                         </div>
                                         <!--end::Actions-->
-                                    </form>
+                                      </form>
                                     <!--end::Form-->
                                 </div>
                                 <!--end::Content-->

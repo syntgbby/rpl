@@ -28,3 +28,14 @@ $routes->get('/myprofile', 'Profile::index');
 $routes->get('/editprofile', 'Profile::indexEdit');
 
 
+
+$routes->get('/form-pendaftaran', 'RegisterUsersController::index');
+
+$routes->get('/profile', 'Profile::index');
+$routes->get('/profile/edit/(:any)', 'Profile::indexEdit/$1');
+$routes->post('/profile/update', 'Profile::update');
+
+
+
+
+
