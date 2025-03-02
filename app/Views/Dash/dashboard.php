@@ -53,7 +53,14 @@
 													</div>
 												</div>
 											</td>
-											<td></td>
+											<td class="text-center">
+												<div class="d-flex justify-content-center">
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+														<label class="form-check-label" for="flexCheckDefault"></label>
+													</div>
+												</div>
+											</td>
 										</tr>
 										<tr>
 											<td class="text-center">2</td>
@@ -67,7 +74,14 @@
 													</div>
 												</div>
 											</td>
-											<td></td>
+											<td class="text-center">
+												<div class="d-flex justify-content-center">
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+														<label class="form-check-label" for="flexCheckDefault"></label>
+													</div>
+												</div>
+											</td>
 										</tr>
 										<tr>
 											<td class="text-center">3</td>
@@ -81,7 +95,14 @@
 													</div>
 												</div>
 											</td>
-											<td></td>
+											<td class="text-center">
+												<div class="d-flex justify-content-center">
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+														<label class="form-check-label" for="flexCheckDefault"></label>
+													</div>
+												</div>
+											</td>
 										</tr>
 										<tr>
 											<td class="text-center">4</td>
@@ -95,7 +116,14 @@
 													</div>
 												</div>
 											</td>
-											<td></td>
+											<td class="text-center">
+												<div class="d-flex justify-content-center">
+													<div class="form-check">
+														<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+														<label class="form-check-label" for="flexCheckDefault"></label>
+													</div>
+												</div>
+											</td>
 										</tr>
 										<!-- Tambahkan baris lain sesuai kebutuhan -->
 									</tbody>
