@@ -18,7 +18,7 @@
 <!--begin::Card title-->
 <div class="card-title">
 <i class="ki-outline ki-badge fs-1 me-2"></i>
-<h2>Add New Contact</h2>
+<h2>Formulir Pendaftaran RPL</h2>
 </div>
 <!--end::Card title-->
 </div>

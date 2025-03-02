@@ -23,70 +23,66 @@ class Profile extends BaseController
         return $this->render('Aplikan/editprofile');
     }
     
-    public function update()
-{
-    $session = \Config\Services::session();
-    $email = $session->get('email');
+    public function getById($email)
+    {
+        $db = \Config\Database::connect();
+        $query = $db->query("SELECT * FROM users");
+        // Gunakan query builder atau parameterized query untuk menghindari SQL Injection
+        $query = $db->query("SELECT * FROM users WHERE email = :email:", ['email' => $email]);
+        $get = $query->getResultArray();
 
-    if (!$email) {
-        return redirect()->to('/login');
-    }
-
-    $db = \Config\Database::connect();
-
-    // Validasi Input
-    $validation = \Config\Services::validation();
-    $validation->setRules([
-        'name'          => 'required|min_length[3]',
-        'telepon'       => 'required|numeric',
-        'tempat_lahir'  => 'required',
-        'jenis_kelamin' => 'required',
-        'agama'         => 'required',
-        'avatar'        => 'permit_empty|uploaded[avatar]|max_size[avatar,2048]|is_image[avatar]|mime_in[avatar,image/jpg,image/jpeg,image/png]'
-    ]);
-
-    if (!$validation->withRequest($this->request)->run()) {
-        return redirect()->back()->withInput()->with('errors', $validation->getErrors());
-    }
-
-    $name          = $this->request->getPost('name');
-    $telepon       = $this->request->getPost('telepon');
-    $tempat_lahir  = $this->request->getPost('tempat_lahir');
-    $jenis_kelamin = $this->request->getPost('jenis_kelamin');
-    $agama         = $this->request->getPost('agama');
-
-    $data = [
-        'name'          => $name,
-        'telepon'       => $telepon,
-        'tempat_lahir'  => $tempat_lahir,
-        'jenis_kelamin' => $jenis_kelamin,
-        'agama'         => $agama
-    ];
-
-    // Upload Avatar (Jika Ada)
-    $avatar = $this->request->getFile('pict');
-    if ($avatar->isValid() && !$avatar->hasMoved()) {
-        $newName = $avatar->getRandomName();
-        $avatar->move('uploads/pict/', $newName);
-        $data['pict'] = $newName;
-
-        // Hapus Gambar Lama (Opsional)
-        $oldAvatar = $db->query("SELECT pict FROM users WHERE email = '$email'")->getRowArray();
-        if ($oldAvatar['avatar'] != null && file_exists('uploads/pict/' . $oldAvatar['pict'])) {
-            unlink('uploads/pict/' . $oldAvatar['pict']);
+        if ($get) {
+            return $this->response->setJSON($get);
+        } else {
+            return $this->response->setJSON(['status' => 'error', 'message' => 'Menu not found']);
         }
     }
+    public function add()
+    {
+        $data = $this->request->getVar();
 
-    // Update Data
-    $query = $db->table('users')->where('email', $email)->update($data);
+        $email = $data['email'];
+        $name = $data['name'];
+        $tempat_lahir = $data['tempat_lahir'];
+        $tanggal_lahir = $data['tanggal_lahir'];
+        $jenis_kelamin = $data['jenis_kelamin'];
+        $telepon = $data['telepon'];
+        $agama = $data['agama'];
 
-    if ($query) {
-        $session->setFlashdata('success', 'Profile berhasil diperbarui');
-        return redirect()->to('/profile');
-    } else {
-        $session->setFlashdata('error', 'Gagal memperbarui profile');
-        return redirect()->back();
+        if ($email == 0) {
+            $db = \Config\Database::connect();
+            $query = $db->query("INSERT INTO users (email, name, tempat_lahir, tanggal_lahir, jenis_kelamin, telepon, agama) VALUES ('$email', '$name', '$tempat_lahir', '$tanggal_lahir', '$jenis_kelamin', '$telepon', '$agama')");
+
+            if ($query) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Menu added successfully'
+                ];
+                return $this->response->setJSON($response);
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Menu added failed'
+                ];
+                return $this->response->setJSON($response);
+            }
+        } else {
+            $db = \Config\Database::connect();
+            $query = $db->query("UPDATE users SET name = '$name', tempat_lahir = '$tempat_lahir', tanggal_lahir = '$tanggal_lahir', jenis_kelamin = '$jenis_kelamin', telepon = '$telepon', agama = '$agama', email = '$email' WHERE email = '$email'");
+
+            if ($query) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'Menu updated successfully'
+                ];
+                return $this->response->setJSON($response);
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'Menu updated failed'
+                ];
+            }
+        }
     }
-}
 
 }
