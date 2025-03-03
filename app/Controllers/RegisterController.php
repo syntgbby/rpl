@@ -12,8 +12,9 @@ class RegisterController extends Controller
 
     public function register()
     {
+        $data = $this->request->getVar();
+        dd($data);
         $session = session();
-        $data = $this->request->getPost();
         $email = strtolower($data['email']);
         $password = strtoupper(md5($data['password']));
 

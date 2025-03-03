@@ -20,6 +20,7 @@ License: For each use you must have a valid license purchased only from above li
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
         <link href="<?= base_url('assets/plugins/global/plugins.bundle.css') ?>" rel="stylesheet" type="text/css" />
         <link href="<?= base_url('assets/css/style.bundle.css') ?>" rel="stylesheet" type="text/css" />
+		<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
         <script>// Frame-busting to prevent site from being loaded within a frame without permission (click-jacking)
             if (window.top != window.self) { window.top.location.replace(window.self.location.href); }
         </script>
