@@ -13,10 +13,29 @@ class RegisterController extends Controller
     public function register()
     {
         $data = $this->request->getVar();
-        dd($data);
-        $session = session();
-        $email = strtolower($data['email']);
-        $password = strtoupper(md5($data['password']));
+
+        $name = $data['name'];
+        $email = $data['email'];
+        $password = $data['password'];
+        $question = $data['question'];
+        $answer = $data['answer'];
+
+        $passHash = strtoupper(md5(strtoupper(md5($email)) . 'P@ssw0rd' . $password));
+
+        date_default_timezone_set('Asia/Jakarta');
+        $data_date = date('Y-m-d H:i:s');
+
+        $data = [
+            'name' => $name,
+            'email' => $email,
+            'password' => $passHash,
+            'question' => $question,
+            'answer' => $answer,
+            'is_reset' => 0,
+            'group_cd' => 'APL',
+            'status' => 'Y',
+            'data_date' => $data_date
+        ];
 
         // Fetch user data from database
         $db = \Config\Database::connect();
@@ -24,31 +43,32 @@ class RegisterController extends Controller
         $user = $builder->where(['email' => $email, 'status' => 'Y'])->get()->getRowArray();
 
         if ($user) {
-            $passHash = strtoupper(md5(strtoupper(md5($email)) . 'P@ssw0rd' . $password));
-            if ($passHash == $user['password']) {
-                $session->set([
-                    'name' => $user['name'],
-                    'email' => $user['email'],
-                    'group_cd' => $user['group_cd'],
-                    'pict' => $user['pict'],
-                    'rowid' => $user['rowid'],
-                    'is_login' => TRUE,
-                ]);
-
-                return redirect()->to('/dashboard');
-            } else {
-                return redirect()->to('/')->with('alert', 'Wrong Password!');
-            }
+            $response = [
+                'status' => 'error',
+                'message' => 'User is already registered!'
+            ];
+            return $this->response->setJSON($response);
         } else {
-            return redirect()->to('/')->with('alert', 'User is not valid!');
+            $query = $db->table("users")->insert($data);
+
+            if ($query) {
+                $response = [
+                    'status' => 'success',
+                    'message' => 'User Successfully Registered!'
+                ];
+                return $this->response->setJSON($response);
+            } else {
+                $response = [
+                    'status' => 'error',
+                    'message' => 'User Registration Failed!'
+                ];
+                return $this->response->setJSON($response);
+            }
         }
     }
 
-    public function logout()
+    public function viewFPass()
     {
-        $session = session();
-        $session->remove('is_login');
-        $session->destroy();
-        return redirect()->to('/')->with('alert', 'Already logged out!');
+        return view('Auth/f_pass');
     }
 }

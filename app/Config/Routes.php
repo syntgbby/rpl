@@ -15,6 +15,7 @@ $routes->get('/logout', 'LoginController::logout');
 // Register
 $routes->get('/register', 'RegisterController::index');
 $routes->post('register/register', 'RegisterController::register');
+$routes->get('/forgot-password', 'RegisterController::viewFPass');
 
 // Dashboard
 $routes->get('/dashboard', 'DashController::index');
@@ -51,13 +52,5 @@ $routes->post('/delete-master-matkul', 'MasterMatkulController::delete');
 $routes->get('/myprofile', 'Profile::index');
 $routes->get('/editprofile', 'Profile::indexEdit');
 
-
-
+// Form Pendaftaran
 $routes->get('/form-pendaftaran', 'RegisterUsersController::index');
-
-
-
-
-
-
-
