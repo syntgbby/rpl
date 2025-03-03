@@ -54,3 +54,4 @@ $routes->get('/editprofile', 'Profile::indexEdit');
 
 // Form Pendaftaran
 $routes->get('/form-pendaftaran', 'RegisterUsersController::index');
+$routes->get('/list-pendaftaran', 'ListController::index');
