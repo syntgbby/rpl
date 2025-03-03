@@ -78,7 +78,7 @@
                                                     <div class="row">
                                                         <!--begin::Col-->
                                                         <div class="col-lg-12 fv-row">
-                                                            <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="Max" />
+                                                            <input type="text" name="name" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name"  />
                                                         </div>
                                                         <!--end::Col-->
                                                      
@@ -91,11 +91,23 @@
                                             <!--begin::Input group-->
                                             <div class="row mb-6">
                                                 <!--begin::Label-->
-                                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Tempat Tanggal Lahir </label>
+                                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Tempat  Lahir </label>
                                                 <!--end::Label-->
                                                 <!--begin::Col-->
                                                 <div class="col-lg-8 fv-row">
-                                                    <input type="text" name="company" class="form-control form-control-lg form-control-solid" placeholder="Company name" value="Keenthemes" />
+                                                    <input type="text" name="tempat_lahir" class="form-control form-control-lg form-control-solid" placeholder="tempat_lahir"  />
+                                                </div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Input group-->
+											<!--begin::Input group-->
+                                            <div class="row mb-6">
+                                                <!--begin::Label-->
+                                                <label class="col-lg-4 col-form-label required fw-semibold fs-6">Tanggal  Lahir </label>
+                                                <!--end::Label-->
+                                                <!--begin::Col-->
+                                                <div class="col-lg-8 fv-row">
+                                                    <input type="text" name="tanggal_lahir" class="form-control form-control-lg form-control-solid" placeholder="tanggal_lahir" />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -112,7 +124,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Col-->
                                                 <div class="col-lg-8 fv-row">
-                                                    <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="044 3276 454 935" />
+                                                    <input type="tel" name="telepon" class="form-control form-control-lg form-control-solid" placeholder="Phone number"  />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -124,7 +136,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Col-->
                                                 <div class="col-lg-8 fv-row">
-                                                    <input type="text" name="website" class="form-control form-control-lg form-control-solid" placeholder="Company website" value="keenthemes.com" />
+                                                    <input type="text" name="jenis_kelamin" class="form-control form-control-lg form-control-solid" placeholder="jenis_kelamin"  />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -136,7 +148,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Col-->
                                                 <div class="col-lg-8 fv-row">
-                                                    <input type="text" name="website" class="form-control form-control-lg form-control-solid" placeholder="Company website" value="keenthemes.com" />
+                                                    <input type="text" name="agama" class="form-control form-control-lg form-control-solid" placeholder="agama"  />
                                                 </div>
                                                 <!--end::Col-->
                                             </div>
@@ -262,5 +274,114 @@
     <!--end::Page-->
 </div>
 <!--end::App-->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var email = $('#modal').data('email');
+
+        if (email != 0) {
+            session();
+        }
+    });
+
+    $('#savefrm').on('click', function(e) {
+        e.preventDefault();
+        var email = $('#modal').data('email');
+        var name = $('#name').val();
+        var tempat_lahir = $('#tempat_lahir').val();
+        var tanggal_lahir = $('#tanggal_lahir').val();
+        var jenis_kelamin = $('#jenis_kelamin').val();
+        var agama = $('#agama').val();
+        var telepon = $('#telepon').val();
+
+        // Cek apakah semua field sudah diisi
+        if (name == "" || tempat_lahir == "" || tanggal_lahir == "" || jenis_kelamin == "" || agama == "" || telepon == "") {
+            toastr.error('All fields must be filled!');
+            return;  // Jangan lanjutkan eksekusi
+        }
+
+        // Menyembunyikan indikator dan menampilkan spinner
+        $('.indicator-label').hide();
+        $('.indicator-progress').show();
+
+        // Menonaktifkan tombol Save untuk mencegah klik ganda
+        $('#savefrm').prop('disabled', true);
+
+        var formData = {
+            email: email,
+            name: name,
+            tempat_lahir: tempat_lahir,
+            tanggal_lahir: tanggal_lahir,
+            jenis_kelamin: jenis_kelamin,
+            agama: agama,
+            telepon: telepon,
+            
+        };
+
+        var actionUrl = '<?= base_url('myprofile') ?>'; // Ganti dengan URL yang sesuai
+
+        // Kirim request AJAX
+        $.ajax({
+            url: actionUrl,
+            type: 'POST',
+            data: formData,
+            success: function(response) {
+                if (response.status === 'success') {
+                    toastr.success(response.message);
+                    location.reload();  // Reload halaman setelah berhasil
+                } else {
+                    toastr.error(response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                toastr.error('An error occurred while sending the request.');
+            },
+            complete: function() {
+                // Mengembalikan status tombol setelah selesai
+                $('#savefrm').prop('disabled', false);
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+            }
+        });
+    });
+
+    // Fungsi untuk memuat data jika ada rowid
+    function session() {
+        var email = $('#modal').data('email');
+
+        if (email === 0) {
+            // Jika rowid adalah 0, reset form untuk tambah data
+            $('#name').val('');
+            $('#tempat_lahir').val('');
+            $('#tanggal_lahir').val('');
+            $('#jenis_kelamin').val('');
+            $('#agama').val('');
+            $('#telepon').val('');
+        } else {
+            // Jika rowid ada, request data untuk mengedit
+            $.ajax({
+                url: '<?= base_url('myprofile/') ?>' + email,
+                type: 'GET',
+                success: function(response) {
+                    if (response.status === 'error') {
+                        toastr.error(response.message);
+                        return;
+                    }
+                    console.log(response);
+                    $('#name').val(response[0].name);
+                    $('#tempat_lahir').val(response[0].tempat_lahir);
+                    $('#tanggal_lahir').val(response[0].tanggal_lahir);
+                    $('#jenis_kelamin').val(response[0].jenis_kelamin);
+                    $('#agama').val(response[0].agama);
+                    $('#telepon').val(response[0].telepon);
+                    
+                }
+            });
+        }
+    }
+</script>
+
+
+
 
 <?= $this->endSection() ?>

@@ -50,3 +50,14 @@ $routes->post('/delete-master-matkul', 'MasterMatkulController::delete');
 // Profile
 $routes->get('/myprofile', 'Profile::index');
 $routes->get('/editprofile', 'Profile::indexEdit');
+
+
+
+$routes->get('/form-pendaftaran', 'RegisterUsersController::index');
+
+
+
+
+
+
+
