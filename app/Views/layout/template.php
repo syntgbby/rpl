@@ -18,7 +18,7 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="<?= base_url('assets/plugins/global/plugins.bundle.js') ?>"></script>
-        <script src="<?= base_url('assets/js/scripts.bundle.js') ?>"></script>	
+        <script src="<?= base_url('assets/js/scripts.bundle.js') ?>"></script>
     </head>
 	<body id="kt_app_body" data-kt-app-header-fixed-mobile="true" data-kt-app-toolbar-enabled="true" class="app-default">
 		<!--begin::Theme mode setup on page load-->
@@ -51,17 +51,39 @@
 										</span>
 									</div>
 									<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" data-kt-menu-offset="-100,0" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
-										<a class="menu-link" href="<?= base_url('list_pendaftaran') ?>">
-											<span class="menu-title">List</a></span>
+										<span class="menu-link">
+											<span class="menu-title">List</span>
 											<span class="menu-arrow d-lg-none"></span>
-										</a>
+										</span>
 									</div>
+									<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
+										<span class="menu-link">
+											<span class="menu-title">Arifin</span>
+											<span class="menu-arrow d-lg-none"></span>
+										</span>
+										<div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown px-lg-2 py-lg-4 w-lg-200px">
+											<div class="menu-item">
+												<a class="menu-link" href="<?= base_url('Mata-Kuliah-RPL') ?>" target="_blank" title="tampilan doang yak" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+													<span class="menu-icon">
+														<i class="bi bi-check2-square fs-x"></i>
+													</span>
+													<span class="menu-title">Daftar Mata kuliah</span>
+												</a>
+												<a class="menu-link" href="<?= base_url('Formulir-Daftar-Riwayat-Hidup') ?>" title="tampilan doang yak" data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-dismiss="click" data-bs-placement="right">
+													<span class="menu-icon">
+														<i class="bi bi-check2-square fs-x"></i>
+													</span>
+													<span class="menu-title">Formulir Daftar Riwayat Hidup</span>
+												</a>
+											</div>
+										</div>
+									</div>
+									
 									<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" data-kt-menu-offset="-100,0" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
 										<span class="menu-link">
 											<span class="menu-title">Pages</span>
 											<span class="menu-arrow d-lg-none"></span>
 										</span>
-		
 									</div>
 									<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
 										<span class="menu-link">
@@ -488,6 +510,7 @@
 			<i class="ki-outline ki-arrow-up"></i>
 		</div>
 		<script>var hostUrl = "<?= base_url('assets/') ?>";</script>
+		<script src="<?= base_url('assets/js/main.js') ?>"></script>
 		<script src="<?= base_url('assets/plugins/global/plugins.bundle.js') ?>"></script>
 		<script src="<?= base_url('assets/js/scripts.bundle.js') ?>"></script>
 		<script src="<?= base_url('assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') ?>"></script>
@@ -505,5 +528,7 @@
 		<script src="<?= base_url('assets/plugins/custom/datatables/datatables.bundle.js') ?>"></script>
 		<script src="<?= base_url('assets/js/widgets.bundle.js') ?>"></script>
 		<script src="<?= base_url('assets/js/custom/widgets.js') ?>"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	</body>
 </html>
