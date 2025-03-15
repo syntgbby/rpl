@@ -293,20 +293,59 @@
                                 </tr>
                                 <tr>
                                     <td><input type="text" class="form-control form-control-transparent" placeholder=""/></td>
+                                    <td class="text-center">
+										<div class="d-flex justify-content-center">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+												<label class="form-check-label" for="flexCheckDefault"></label>
+											</div>
+										</div>
+									</td>
+									<td class="text-center">
+										<div class="d-flex justify-content-center">
+											<div class="form-check form-check-custom form-check-danger form-check-solid">
+												<input class="form-check-input" type="checkbox" value="">
+												<label class="form-check-label" for="flexCheckDefault"></label>
+											</div>
+										</div>
+									</td>
                                     <td><input type="text" class="form-control form-control-transparent" placeholder=""/></td>
                                     <td><input type="text" class="form-control form-control-transparent" placeholder=""/></td>
+                                    
                                 </tr>
                                 <tr>
                                     <td><input type="text" class="form-control form-control-transparent" placeholder=""/></td>
+                                    <td class="text-center">
+										<div class="d-flex justify-content-center">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+												<label class="form-check-label" for="flexCheckDefault"></label>
+											</div>
+										</div>
+									</td>
+									<td class="text-center">
+										<div class="d-flex justify-content-center">
+											<div class="form-check form-check-custom form-check-danger form-check-solid">
+												<input class="form-check-input" type="checkbox" value="">
+												<label class="form-check-label" for="flexCheckDefault"></label>
+											</div>
+										</div>
+									</td>
                                     <td><input type="text" class="form-control form-control-transparent" placeholder=""/></td>
                                     <td><input type="text" class="form-control form-control-transparent" placeholder=""/></td>
+                                    
                                 </tr>
+                                
                             </tbody>
                             </table>
                         </div>
+                        <p><small style="color:red">*</small>Apabila berpindah posisi/jabatan dalam pengalaman pekerjaan tersebut maka posisi/jabatan tersebut harus dituliskan dalam tabel meskipun perubahan posisi/jabatan tersebut masih dalam perusahaan yang sama</p>
                         <!-- END Riwayat Pekerjaan -->
-
                     </div>
+                    <div class="">
+						<button type="button" id="kt_docs_sweetalert_basic" class="btn btn-primary">Simpan</button>
+						<button type="button" id="kt_docs_sweetalert_basic" class="btn btn-danger">Batal</button>
+					</div>
 				</div>
 			</div>
 		</div>
