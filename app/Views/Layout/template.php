@@ -28,6 +28,9 @@ License: For each use you must have a valid license purchased only from above li
         <!--begin::Global Javascript Bundle(mandatory for all pages)-->
         <script src="<?= base_url('assets/plugins/global/plugins.bundle.js') ?>"></script>
         <script src="<?= base_url('assets/js/scripts.bundle.js') ?>"></script>	
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
         <!-- SweetAlert2 CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.5.1/dist/sweetalert2.min.css">
 

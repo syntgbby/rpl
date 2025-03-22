@@ -11,7 +11,7 @@ class RegisterUsersController extends BaseController
 
     public function indexAdd()
     {
-        return $this->render('MasterUser/add_user');
+        return $this->render('RegisterUsers/add_pk');
     }
 
     public function getById($rowid)
