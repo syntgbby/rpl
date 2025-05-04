@@ -17,8 +17,8 @@
                 <h5 class="card-title">Keterangan <span>| Validasi</span></h5>
                 <div class="">
                     <ul style="font-size: 14px;">
-                        <li>Silahkan pilih kurikulum</li>
-                        <li>Pilih calon mahasiswa RPL</li>
+                        <li>Silahkan klik ikon pada kolom action</li>
+                        <li>Kemudian jika sudah sesuai pilih data kurikulum</li>
                         <li>Tentukan .....</li>
                         <li>Selesai</li>
                     </ul>
@@ -80,6 +80,9 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="validasi-tab" data-bs-toggle="tab" data-bs-target="#validasi" type="button" role="tab">Validasi</button>
                 </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="selesai-tab" data-bs-toggle="tab" data-bs-target="#selesai" type="button" role="tab">Selesai</button>
+                </li>
             </ul>
 
             <!-- Tab Content -->
@@ -110,7 +113,7 @@
                                             <td>5</td>
                                             <td>Designer</td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-warning editBtn"
+                                                <a href="#" class="btn btn-sm btn-primary editBtn"
                                                     data-nama="Brandon Jacob"
                                                     data-alamat="Jakarta"
                                                     data-umur="28"
@@ -128,7 +131,7 @@
                                             <td>6</td>
                                             <td>Admin</td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-warning editBtn"
+                                                <a href="#" class="btn btn-sm btn-primary editBtn"
                                                     data-nama="James"
                                                     data-alamat="Jakarta"
                                                     data-umur="28"
@@ -146,7 +149,7 @@
                                             <td>3</td>
                                             <td>Teknisi</td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-warning editBtn"
+                                                <a href="#" class="btn btn-sm btn-primary editBtn"
                                                     data-nama="Yamal"
                                                     data-alamat="Bekasi"
                                                     data-umur="18"

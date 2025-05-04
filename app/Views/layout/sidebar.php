@@ -23,21 +23,6 @@ $uri = service('uri');
             <i class="bi bi-circle"></i><span>Calon RPL</span>
           </a>
         </li>
-        <li>
-          <a href="<?= base_url('components-accordion') ?>" class="<?= $uri->getSegment(1) === 'components-accordion' ? 'active' : '' ?>">
-            <i class="bi bi-circle"></i><span>Accordion</span>
-          </a>
-        </li>
-        <li>
-          <a href="<?= base_url('components-badges') ?>" class="<?= $uri->getSegment(1) === 'components-badges' ? 'active' : '' ?>">
-            <i class="bi bi-circle"></i><span>Badges</span>
-          </a>
-        </li>
-        <li>
-          <a href="<?= base_url('components-breadcrumbs') ?>" class="<?= $uri->getSegment(1) === 'components-breadcrumbs' ? 'active' : '' ?>">
-            <i class="bi bi-circle"></i><span>Breadcrumbs</span>
-          </a>
-        </li>
       </ul>
     </li><!-- End Components Nav -->
 
