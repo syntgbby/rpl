@@ -13,4 +13,8 @@ class ListController extends BaseController
     {
         return view('list/v_formulir_riwayat_hidup');  // Pastikan view ini ada
     }
+    public function listCalonRPL()
+    {
+        return view('list/v_calon_RPL');  // Pastikan view ini ada
+    }
 }

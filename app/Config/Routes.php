@@ -14,3 +14,4 @@ $routes->get('/logout', 'LoginController::logout');
 $routes->get('/dashboard', 'DashController::index');
 $routes->get('/Mata-Kuliah-RPL', 'ListController::index');
 $routes->get('/Formulir-Daftar-Riwayat-Hidup', 'ListController::formRiwayatHidup');
+$routes->get('/Assesor-List-Calon-RPL', 'ListController::listCalonRPL');

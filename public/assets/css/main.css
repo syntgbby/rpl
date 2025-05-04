@@ -1,0 +1,28 @@
+/* Membatasi lebar select */
+.form-select {
+    width: 300px; /* Atur lebar sesuai kebutuhan */
+    margin: 0 auto; /* Agar berada di tengah */
+}
+
+/* Styling tambahan untuk tampilan */
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.form-select:hover {
+    border-color: #007bff;
+    background-color: #fff;
+}
+
+/* Fokus pada select */
+.form-select:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: #007bff;
+}
