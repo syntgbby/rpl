@@ -13,18 +13,24 @@ $uri = service('uri');
     </li><!-- End Dashboard Nav -->
 
     <li class="nav-item">
-      <a class="nav-link <?= in_array($uri->getSegment(1), ['Assesor-List-Calon-RPL']) ? '' : 'collapsed' ?>" 
-         data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+      <a class="nav-link <?= in_array($uri->getSegment(1), ['Assesor-List-Calon-RPL', 'Laporan-RPL']) ? '' : 'collapsed' ?>" 
+        data-bs-target="#components-nav" data-bs-toggle="collapse" href="javascript:void(0)">
         <i class="bi bi-menu-button-wide"></i><span>RPL</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-      <ul id="components-nav" class="nav-content collapse <?= in_array($uri->getSegment(1), ['Assesor-List-Calon-RPL']) ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
+      <ul id="components-nav" class="nav-content collapse <?= in_array($uri->getSegment(1), ['Assesor-List-Calon-RPL', 'Laporan-RPL']) ? 'show' : '' ?>" data-bs-parent="#sidebar-nav">
         <li>
           <a href="<?= base_url('Assesor-List-Calon-RPL') ?>" class="<?= $uri->getSegment(1) === 'Assesor-List-Calon-RPL' ? 'active' : '' ?>">
             <i class="bi bi-circle"></i><span>Calon RPL</span>
           </a>
         </li>
+        <li>
+          <a href="<?= base_url('Laporan-RPL') ?>" class="<?= $uri->getSegment(1) === 'Laporan-RPL' ? 'active' : '' ?>">
+            <i class="bi bi-circle"></i><span>Laporan RPL</span>
+          </a>
+        </li>
       </ul>
-    </li><!-- End Components Nav -->
+    </li>
+
 
     <li class="nav-heading">Pages</li>
 

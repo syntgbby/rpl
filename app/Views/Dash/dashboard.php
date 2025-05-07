@@ -1,77 +1,73 @@
 <?= $this->extend('layout/template'); ?>
 <?= $this->section('content'); ?>
-<div class="pagetitle">
-  <h1>Selamat Datang .....</h1>
-  <nav>
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-      <li class="breadcrumb-item active">Dashboard</li>
-    </ol>
-  </nav>
-</div><!-- End Page Title -->
-<div class="row">
-<div class="col-lg-6">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Bar CHart</h5>
 
-      <!-- Bar Chart -->
-      <canvas id="barChart" style="max-height: 400px;"></canvas>
-      <script>
-        document.addEventListener("DOMContentLoaded", () => {
-          new Chart(document.querySelector('#barChart'), {
-            type: 'bar',
-            data: {
-              labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026'],
-              datasets: [{
-                label: 'Bar Chart',
-                data: [65, 59, 80, 81, 56, 55, ],
-                backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
-                  'rgba(255, 159, 64, 0.2)',
-                  'rgba(255, 205, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(54, 162, 235, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(201, 203, 207, 0.2)'
-                ],
-                borderColor: [
-                  'rgb(255, 99, 132)',
-                  'rgb(255, 159, 64)',
-                  'rgb(255, 205, 86)',
-                  'rgb(75, 192, 192)',
-                  'rgb(54, 162, 235)',
-                  'rgb(153, 102, 255)',
-                  'rgb(201, 203, 207)'
-                ],
-                borderWidth: 1
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
-              }
-            }
-          });
-        });
-      </script>
-      <!-- End Bar CHart -->
-    </div>
-  </div>
-</div>
-<div class="col-md-6">
-        <div class="card recent-sales overflow-auto">
-            <div class="card-body">
-                <h5 class="card-title">Calon Mahasiswa RPL<span> | Status</span></h5>
-                <div class="">
-                    <ul style="font-size: 14px;">
-                        
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div><!-- End Keterangan -->
-</div>
-  <?= $this->endSection(''); ?>
+<div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
+	<div id="kt_app_toolbar" class="app-toolbar py-6">
+		<div id="kt_app_toolbar_container" class="app-container container-xxl d-flex align-items-start">
+			<div class="d-flex flex-column flex-row-fluid">
+				<div class="d-flex flex-stack flex-wrap flex-lg-nowrap gap-4 gap-lg-10 pt-6 pb-18 py-lg-13">
+					<div class="page-title d-flex align-items-center me-3">
+						<img alt="Logo" src="<?= base_url('assets/media/svg/misc/layer.svg') ?>" class="h-60px me-5" />
+						<h1 class="page-heading d-flex text-white fw-bolder fs-2 flex-column justify-content-center my-0">RPL - Assessment
+							<span class="page-desc text-white opacity-50 fs-6 fw-bold pt-4">RPL</span>
+						</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="app-container container-xxl">
+		<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+			<div class="d-flex flex-column flex-column-fluid">
+				<div id="kt_app_content" class="app-content">
+					<div class="col-lg-6 col-xxl-4">
+						<!--begin::Card-->
+						<div class="card h-100">
+							<!--begin::Card body-->
+							<div class="card-body p-9">
+								<!--begin::Heading-->
+								<div class="fs-2hx fw-bold">237</div>
+								<div class="fs-4 fw-semibold text-gray-500 mb-7">Calon Mahasiswa RPL</div>
+								<!--end::Heading-->
+
+								<!--begin::Wrapper-->
+								<div class="d-flex flex-wrap">
+									<!--begin::Labels-->
+									<div class="d-flex flex-column justify-content-center flex-row-fluid pe-11 mb-5">
+										<!--begin::Label-->
+										<div class="d-flex fs-6 fw-semibold align-items-center mb-3">
+											<div class="bullet bg-primary me-3"></div>
+											<div class="text-gray-500">Active</div>
+											<div class="ms-auto fw-bold text-gray-700">30</div>
+										</div>
+										<!--end::Label-->
+
+										<!--begin::Label-->
+										<div class="d-flex fs-6 fw-semibold align-items-center mb-3">
+											<div class="bullet bg-success me-3"></div>
+											<div class="text-gray-500">Completed</div>
+											<div class="ms-auto fw-bold text-gray-700">45</div>
+										</div>
+										<!--end::Label-->
+
+										<!--begin::Label-->
+										<div class="d-flex fs-6 fw-semibold align-items-center">
+											<div class="bullet bg-gray-300 me-3"></div>
+											<div class="text-gray-500">Pending</div>
+											<div class="ms-auto fw-bold text-gray-700">25</div>
+										</div>
+										<!--end::Label-->
+									</div>
+									<!--end::Labels-->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+				<?= $this->endSection(''); ?>

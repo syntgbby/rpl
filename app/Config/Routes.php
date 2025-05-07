@@ -12,6 +12,5 @@ $routes->get('/register', 'LoginController::register');
 $routes->get('/logout', 'LoginController::logout');
 
 $routes->get('/dashboard', 'DashController::index');
-$routes->get('/Mata-Kuliah-RPL', 'ListController::index');
-$routes->get('/Formulir-Daftar-Riwayat-Hidup', 'ListController::formRiwayatHidup');
-$routes->get('/Assesor-List-Calon-RPL', 'ListController::listCalonRPL');
+$routes->get('/v_calon_rpl', 'ListController::listCalonRPL');
+$routes->get('assessment/edit/(:num)', 'Assesor::edit/$1');
