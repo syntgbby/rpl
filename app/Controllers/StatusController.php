@@ -8,4 +8,5 @@ class StatusController extends BaseController
     {
         return $this->render('Dash/statuspendaftaran');
     }
+  
 }
