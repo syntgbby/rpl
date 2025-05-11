@@ -26,7 +26,7 @@ $routes->post('/delete-master-user', 'MasterUserController::delete');
 
 $routes->get('/myprofile', 'Profile::index');
 $routes->get('/editprofile', 'Profile::indexEdit');
-
+$routes->get('/statuspendaftaran', 'StatusController::index');
 
 
 $routes->get('/form-pendaftaran', 'RegisterUsersController::index');
