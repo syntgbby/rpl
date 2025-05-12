@@ -26,7 +26,7 @@
             <div class="d-flex flex-column flex-md-row-fluid w-md-50">
                 <div class="d-flex flex-center flex-column flex-md-row-fluid">
                     <div class="w-md-500px">
-                        <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="GET" action="<?= base_url('login') ?>">
+                        <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" method="POST" action="<?= base_url('login') ?>">
                             <div class="text-center mb-11">
                                 <h1 class="text-gray-900 fw-bolder mb-3">Sign In</h1>
                             </div>

@@ -2,57 +2,47 @@
 
 namespace App\Controllers;
 
+use App\Models\UserModel;
+
 class LoginController extends BaseController
 {
-    public function index(): string
+    public function index()
     {
         return view('Auth/login');
+    }
+    public function login()
+    {
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+
+        $userModel = new UserModel();
+        $user = $userModel->get_data_user_by_email($email);
+
+        if ($user) {
+            if ($user['password'] == $password) {
+                // Login sukses
+                session()->set('_Nama', $user['nama']);
+                session()->set('_Email', $user['email']);
+                session()->set('_KodeProdi', $user['kode_prodi']);
+                return redirect()->to('/auth');
+            } else {
+                // Login gagal
+                return redirect()->back()->withInput()->with('error', 'passwod salah!');
+            }
+        } else {
+            // Login gagal
+            return redirect()->back()->withInput()->with('error', 'email tidak ditemukan!');
+        }
     }
 
     public function auth()
     {
         return view('Dash/dashboard');
-        // $email = $this->request->getVar('email');
-        // $password = $this->request->getVar('password');
-
-        // // Menggunakan query builder untuk menghindari SQL Injection
-        // $userModel = model('App\Models\UserModel');
-        // $user = $userModel->where('email', $email)->first();
-
-        // // Mengecek apakah user ditemukan
-        // if (!$user) {
-        //     return $this->response->setJSON([
-        //         'status' => 'error',
-        //         'message' => 'Email atau password salah'
-        //     ]);
-        // }
-
-        // // Memverifikasi password menggunakan password_verify()
-        // if (!password_verify($password, $user['password'])) {
-        //     return $this->response->setJSON([
-        //         'status' => 'error',
-        //         'message' => 'Email atau password salah'
-        //     ]);
-        // }
-
-        // // Jika login berhasil
-        // return $this->response->setJSON([
-        //     'status' => 'success',
-        //     'message' => 'Login berhasil',
-        //     'data' => [
-        //         'user_id' => $user['rowid'],
-        //         'email' => $user['email']
-        //     ]
-        // ]);
-    }
-
-    public function register()
-    {
-        return view('Auth/register');
     }
 
     public function logout()
     {
-        return view('Auth/login');
+        session()->destroy();
+        return redirect()->to('/')->send(); // Wajib pakai ->send() di __construct
     }
 }

@@ -50,12 +50,17 @@
  										</a>
  									</div>
  									<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" data-kt-menu-offset="-100,0" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
- 										<a class="menu-link" href="<?= base_url('v_calon_rpl') ?>">
+ 										<a class="menu-link" href="<?= base_url('rpl') ?>">
  											<span class="menu-title">RPL</a></span>
  											<span class="menu-arrow d-lg-none"></span>
  										</a>
  									</div>
- 									
+ 									<div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" data-kt-menu-offset="-100,0" class="menu-item menu-lg-down-accordion me-0 me-lg-2">
+ 										<a class="menu-link" href="<?= base_url('status_rpl') ?>">
+ 											<span class="menu-title">Status</a></span>
+ 											<span class="menu-arrow d-lg-none"></span>
+ 										</a>
+ 									</div>
  								</div>
  							</div>
  						
@@ -156,6 +161,7 @@
  		<script src="<?= base_url('assets/plugins/custom/datatables/datatables.bundle.js') ?>"></script>
  		<script src="<?= base_url('assets/js/widgets.bundle.js') ?>"></script>
  		<script src="<?= base_url('assets/js/validasi.js') ?>"></script>
+ 		<script src="<?= base_url('assets/js/ajax.js') ?>"></script>
  		<script src="<?= base_url('assets/js/custom/widgets.js') ?>"></script>
  	</body>
  </html>
