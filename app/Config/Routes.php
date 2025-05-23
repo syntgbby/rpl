@@ -29,6 +29,8 @@ $routes->get('/editprofile', 'Profile::indexEdit');
 $routes->get('/statuspendaftaran', 'StatusController::index');
 $routes->get('/detailpendaftaran', 'Detailpendaftaran::index');
 $routes->get('/lokasi', 'LokasiController::index');
+$routes->get('/datapendaftaran', 'Datapendaftaran::index');
+$routes->post('export/pdf', 'ExportController::exportPdf');
 
 
 $routes->get('/form-pendaftaran', 'RegisterUsersController::index');
