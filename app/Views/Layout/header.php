@@ -46,7 +46,7 @@
                     <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" data-kt-menu-offset="-50,0" class="menu-item <?= (current_url() == base_url('lokasi') ? 'here show menu-here-bg' : '') ?> menu-lg-down-accordion me-0 me-lg-2" onclick="window.location.href='<?= base_url('lokasi') ?>'">
                         <!--begin:Menu link-->
                         <span class="menu-link">
-                            <span class="menu-title">Lokasi</span>
+                            <span class="menu-title">Tentang Rpl</span>
                         </span>
                         <!--end:Menu link-->
                     </div>
