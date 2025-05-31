@@ -51,6 +51,15 @@
                         <!--end:Menu link-->
                     </div>
                     <!--end:Menu item-->
+                    <!--begin:Menu item-->
+                    <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" data-kt-menu-offset="-50,0" class="menu-item <?= (current_url() == base_url('detailpendaftaran') ? 'here show menu-here-bg' : '') ?> menu-lg-down-accordion me-0 me-lg-2" onclick="window.location.href='<?= base_url('detailpendaftaran') ?>'">
+                        <!--begin:Menu link-->
+                        <span class="menu-link">
+                            <span class="menu-title">Detail Pendaftaran</span>
+                        </span>
+                        <!--end:Menu link-->
+                    </div>
+                    <!--end:Menu item-->
                     <?php if (session()->get('email') != "admin@gmail.com") : ?>
                     <!--begin:Menu item-->
                     <div data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-placement="bottom-start" class="menu-item <?= (current_url() == base_url('master-user') || current_url() == base_url('master-menu') ? 'here show menu-here-bg' : '') ?> menu-lg-down-accordion menu-sub-lg-down-indention me-0 me-lg-2">
